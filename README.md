@@ -1,40 +1,36 @@
-# 💸 Git back guarantee
+# 💸 Git Back Guarantee
 
-`Gbg` allows you to transfer commit activity from a git repository using account `A` to a git repository using account `B`
-without leaking sensitive information about repository `A`.
+Git Back Guarantee is a tool designed to transfer commit activity from one Git repository to another,
+allowing you to seamlessly move commit history from account `A` to account `B` without exposing sensitive information about repository `A`.
+
+I'm sure you could have written this script yourself, however this one is for the lazy.
 
 ## 📋 Prerequisites
 - Git
 - Bash
 
 ## 📦 Setting up
-For `gbg` to make sense, you need to have a work repository.
-
-Let's say your work repository's `user.email` is `dev@work.com`.
-
-What you want is to have another repository, one that is in your personal GitHub account cloned
-(This repository will be the one in which we make mock commits to transfer the commit history).
-
-Although it is not required, I strongly suggest that this personal repository is private.
-
-Also don't forget to set the correct `user.email` and `user.name` in the local clone of the private
-repository to your personal ones. You can do this by executing the following commands in the local clone:
-```
-$ git config user.email dev@personal.com
-$ git config user.name Your Name
+To use `gbg`, ensure you have a work repository and a personal repository set up. Follow these steps:
+1. Clone your personal repository from your GitHub account. *I strongly suggest that this repository is private.*
+2. Set the `user.email` and `user.name` in the local clone of the personal repository to your personal credentials:
+```bash
+git config user.email dev@personal.com
+git config user.name Your Name
 ```
 
 ## 🚀 Usage
-- Execute: 
+1. Run the following command:
+```bash
+bash ./gbg.sh
 ```
-$ bash ./gbg.sh
+2. Enter the path to your work repository when prompted.
+3. Enter the path to your personal commits repository when prompted.
+4. Specify the branch from your work repository that you want to transfer commit activity from (leave empty to use the current branch).
+5. Navigate to your personal repository and execute:
+```bash
+git push
 ```
-- You will get a prompt to enter the path to your work repository.
-- You will be propmted to enter the path toyour personal commits repository.
-- You will be prompted to enter the work repository branch from which you want to transfer commit activity.
-- Voila, you just need to `cd` into the personal repository and execute `$ git push`.
 
 ## 📋 Todos:
-- [ ] Stop prompting user to enter paths, use parameters instead.
-- [ ] Compile to an executable.
-- [ ] Better readme.
+- [ ] Refactor to use parameters instead of prompting for paths.
+- [ ] Compile to an executable for easier usage.
