@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env bash
+set -e
 
 red='\033[0;31m'
 cyan='\033[0;36m'   
@@ -34,7 +35,8 @@ dates=$(git log --committer="$author" --pretty="%ad")
 
 git switch -
 
-while IFS= read -r date; do
+while IFS= read -r date; 
+do
     cd $commit_repo_path
     echo $date >> $branch
     git add .
