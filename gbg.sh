@@ -32,11 +32,11 @@ echo -e "🚀${cyan}Mocking commits from $work_repo_path@$branch -> $commit_repo
 
 dates=$(git log --committer="$author" --pretty="%ad")
 
+git switch -
+
 while IFS= read -r date; do
     cd $commit_repo_path
     echo $date >> $branch
     git add .
     GIT_AUTHOR_DATE="date -d '${date}'" GIT_COMMITTER_DATE="date -d '${date}'" git commit -m "$date" 
 done <<< "$dates"
-
-git switch -
