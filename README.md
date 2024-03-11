@@ -25,8 +25,16 @@ $ git config user.name Your Name
 ```
 
 ## 🚀 Usage
-- Execute `$ bash ./gbg.sh`.
+- Execute: 
+```
+$ bash ./gbg.sh
+```
 - You will get a prompt to enter the path to your work repository.
 - You will be propmted to enter the path toyour personal commits repository.
 - You will be prompted to enter the work repository branch from which you want to transfer commit activity.
 - Voila, you just need to `cd` into the personal repository and execute `$ git push`.
+
+## 📋 Todos:
+- [ ] Stop prompting user to enter paths, use parameters instead.
+- [ ] Compile to an executable.
+- [ ] Better readme.
