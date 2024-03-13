@@ -19,18 +19,17 @@ git config user.name Your Name
 ```
 
 ## 🚀 Usage
-1. Run the following command:
-```bash
-bash ./gbg.sh
-```
-2. Enter the path to your work repository when prompted.
-3. Enter the path to your personal commits repository when prompted.
-4. Specify the branch from your work repository that you want to transfer commit activity from (leave empty to use the current branch).
-5. Navigate to your personal repository and execute:
+- When running `gbg`, the following options are available:
+    - `-w` - Required: specifies the path to your work repository.
+    - `-c` - Required: specifies the path to your personal commits repository.
+    - `-b` - Optional: specifies the branch from your work repository that 
+            you want to transfer commit activity from (leave empty to use the current branch).
+- After running `gbg` navigate to your personal repository and execute:
 ```bash
 git push
 ```
 
+
 ## 📋 Todos:
-- [ ] Refactor to use parameters instead of prompting for paths.
 - [ ] Compile to an executable for easier usage.
+- [ ] Add to brew.
