@@ -5,13 +5,28 @@ red='\033[0;31m'
 cyan='\033[0;36m'   
 nc='\033[0m'
 
-read -e -p "Path to work repo: " work_repo_path
-work_repo_path="${work_repo_path/#~/$HOME}"
-
-read -e -p "Commit repo path (where the mock commits will happen): " commit_repo_path
-commit_repo_path="${commit_repo_path/#~/$HOME}"
-
-read -p "Branch (empty to use the current one): " branch
+while getopts ":w:c:b:" opt; do
+  case ${opt} in
+    w )
+      work_repo_path="${OPTARG/#~/$HOME}"
+      ;;
+    c )
+      commit_repo_path="${OPTARG/#~/$HOME}"
+      ;;
+    b )
+      branch="${OPTARG}"
+      ;;
+    \? )
+      echo "Invalid option: $OPTARG" 1>&2
+      exit 1
+      ;;
+    : )
+      echo "Invalid option: $OPTARG requires an argument" 1>&2
+      exit 1
+      ;;
+  esac
+done
+shift $((OPTIND -1))
 
 cd "$work_repo_path"
 author=$(git config user.name)
@@ -21,6 +36,7 @@ then
     branch=$(git branch --show-current)
 else
     git switch $branch
+    needsSwitch=true
 fi
 
 if [[ -z $commit_repo_path ]] || [[ -z $work_repo_path ]];
@@ -33,7 +49,10 @@ echo -e "🚀${cyan}Mocking commits from $work_repo_path@$branch -> $commit_repo
 
 dates=$(git log --committer="$author" --pretty="%ad")
 
-git switch -
+if [[ -n $needsSwitch ]];
+then
+    git switch -
+fi
 
 while IFS= read -r date; 
 do
